@@ -1,0 +1,9 @@
+query get_payment_gateway{
+  payment_gateways(
+    type: StripeConnectPaymentGateway,
+    mode: test
+  ){
+    current_mode_publishable_key
+    test_publishable_key
+  }
+}

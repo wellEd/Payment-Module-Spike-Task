@@ -2,10 +2,10 @@
 slug: /
 layout_name: 1col
 ---
-{%- graphql response="get_current_user_data" -%}
-{%- assign current_user = response.current_user -%}
+{% graphql response = "get_current_user_data" %}
+{%- assign c_user = response.current_user -%}
 
-{%- if current_user == blank -%}
+{%- if c_user == blank -%}
     {%- include_form "sign_in" -%}
 {%- else -%}
     <h2>Current User</h2>
@@ -16,7 +16,9 @@ layout_name: 1col
 {%- endif -%}
 
 <hr><br>
-
+{% query_graph "get_payment_gateway", result_name: "p" %}
+{{p}}
+<br><hr><br>
 {%- parse_json data -%}
   {
     "email": "{{ context.current_user.email }}",
@@ -44,4 +46,30 @@ layout_name: 1col
   include_form "modules/payments/gateway_request_form",
   config: config,
   data: data
-%}
+%} 
+{% comment %} {%- include_form "modules/charge_example/simple_payment_form" -%} {% endcomment %}
+
+<br><br><hr><br><br>
+
+<div class="mt-4">
+  <h4>List of last five test payments:</h4>
+  &lt;graphql&gt;{% query_graph "modules/payments/get_payments", per_page: 5, result_name: "g" %}&lt;graphql&gt;
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>State</th>
+      <th>Payer</th>
+      <th>Amount</th>
+      <th>Actions</th>
+    </tr>
+    {% for payment in g.payments.results  %}
+      <tr>
+        <td>{{ payment.id }}</td>
+        <td>{{ payment.properties.state | capitalize }}</td>
+        <td>{{ payment.user.name }}</td>
+        <td>{{ payment.properties.amount_cents | pricify_cents }}</td>
+        <td>{% include 'modules/payments/create_refund', payment: payment %}</td>
+      </tr>
+    {% endfor %}
+  </table>
+</div>
