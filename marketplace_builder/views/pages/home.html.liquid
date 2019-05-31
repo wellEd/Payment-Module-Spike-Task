@@ -2,6 +2,46 @@
 slug: /
 layout_name: 1col
 ---
-{%- assign name = 'Home' -%}
-{%- content_for 'pagetitle' -%}{{ name }}{%- endcontent_for -%}
-<h1>{{ name }}</h1>
+{%- graphql response="get_current_user_data" -%}
+{%- assign current_user = response.current_user -%}
+
+{%- if current_user == blank -%}
+    {%- include_form "sign_in" -%}
+{%- else -%}
+    <h2>Current User</h2>
+    {{response}}
+    <br><br>
+    {%- include_form "session_destroy" -%}
+    <br>
+{%- endif -%}
+
+<hr><br>
+
+{%- parse_json data -%}
+  {
+    "email": "{{ context.current_user.email }}",
+    "currency": "USD",
+    "description": "Charge Example",
+    "statement_descriptor": "Example 1.",
+    "amount": "500",
+    "require_zip": true
+  }
+{%- endparse_json -%}
+
+{%- parse_json config -%}
+  {
+    "gateway": "stripe",
+    "request_type": "create_payment",
+    "button": "Pay Now",
+    "require_zip": "true",
+    "redirect_to": "/payments"
+  }
+{%- endparse_json -%}
+{{ config }} - config
+{{ config.gateway }} - gateway
+
+{%-
+  include_form "modules/payments/gateway_request_form",
+  config: config,
+  data: data
+%}

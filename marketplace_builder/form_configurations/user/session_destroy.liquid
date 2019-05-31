@@ -1,0 +1,10 @@
+---
+name: session_destroy
+resource: Session
+return_to: /
+flash_alert: An error has occur
+---
+
+{% form method: 'delete' %}
+  <button>Log Out</button>
+{% endform %}

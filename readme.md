@@ -2,6 +2,8 @@
 
 Platform OS Payment Module Spike Task with integration to Stripe Payment Gateway
 
+&nbsp;
+
 ## Installation
 
 ### Step 1
@@ -29,13 +31,14 @@ You have to get access to [Partner Portal](https://portal.apps.near-me.com/)
 marketplace-kit env add [environment] --email [your email] --url [your Instance URL]
 ```
 
+&nbsp;
 
 ## Payment Module Installation
 
 Separate modules are need to be installed to use unto your project, simply follow the steps bellow for quick installation.
 
 ### Installation with Partner Portal
-1. Go to [modules marketplace](https://portal.apps.near-me.com/module_marketplace) and click on "Buy" (It's FREE) next to "PlatformOS Payments" and "PlatformOS Payments Stripe" modules.
+1. Go to [modules marketplace](https://portal.apps.near-me.com/marketplace/pos_modules) and select "Payments" and "Stripe" modules then click [Add to instance].
 2. Go to your Instance view and install both modules
 3. In the installation process set up Stripe public and secret keys
 4. Make sure enable_sms_and_api_workflow_alerts_on_staging in your instance configuration is set to true
@@ -56,6 +59,7 @@ git submodule add https://github.com/mdyd-dev/platformos-payments-stripe modules
 5. Deploy instance.
 6. Make sure enable_sms_and_api_workflow_alerts_on_staging in your instance configuration is set to true
 
+&nbsp;
 
 ## Usage
 Deploy project to instance
@@ -69,8 +73,14 @@ A Environment URL will be displayed in your terminal
 Environment [environment_url]
 ```
 
+&nbsp;
+
 ## More Details
 
 Read the documentation for the concept and references for Platform OS [here](https://documentation.platform-os.com/tutorials/).
 
-Payment Module documentation are in the [readme.md](https://github.com/mdyd-dev/platformos-payments/blob/master/README.md) file of their [github repository](https://github.com/mdyd-dev/platformos-payments).
+Payment Module documentation are in the [readme.md](https://github.com/mdyd-dev/platformos-payments/blob/master/README.md) file of their [github repository](https://github.com/mdyd-dev/platformos-payments) and the module description in Partner Portal.
+
+- [Payment Module](https://portal.apps.near-me.com/marketplace/pos_modules/53)
+
+- [Stripe Module](https://portal.apps.near-me.com/marketplace/pos_modules/52)

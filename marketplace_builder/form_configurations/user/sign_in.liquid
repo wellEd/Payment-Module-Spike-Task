@@ -1,0 +1,19 @@
+---
+name: sign_in
+resource: Session
+fields:
+  email:
+  password:
+---
+{% form %}
+  <label for="email">Email</label>
+  <input name="{{ form_builder.fields.email.name }}" value="{{ form_builder.fields.email.value }}" id="email" type="email">
+
+  <label for="password">Password</label>
+  <input name="{{ form_builder.fields.password.name }}" id="password" type="password">
+  {% if form_builder.errors.password %}
+    <p>{{ form_builder.errors.password }}</p>
+  {% endif %}
+
+  <button>Log In</button>
+{% endform %}
