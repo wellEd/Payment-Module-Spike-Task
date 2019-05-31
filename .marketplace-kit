@@ -1,0 +1,7 @@
+{
+  "staging": {
+    "url": "https://r2c-playground-lowell.staging.oregon.platform-os.com/",
+    "token": "ecda3c92d38cd30f0a653ecaa169e11a1426ab2d",
+    "email": "lowell@cbo.me"
+  }
+}
